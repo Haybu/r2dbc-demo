@@ -28,7 +28,6 @@ import reactor.core.publisher.Mono;
  * @author Haytham Mohamed
  **/
 @RestController
-@Slf4j
 public class Controller {
 
 	private final EmployeeRepository repository;
@@ -37,13 +36,12 @@ public class Controller {
 		this.repository = repository;
 	}
 
-	@GetMapping
+	@GetMapping("/employees")
 	public Flux<Employee> employees() {
-		log.info("getting all employees");
 		return repository.findAll();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/employees/{id}")
 	public Mono<Employee> employee(@PathVariable Integer id) {
 		return repository.findById(id);
 	}

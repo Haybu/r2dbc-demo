@@ -33,6 +33,12 @@ import org.springframework.data.relational.core.mapping.RelationalMappingContext
 @Configuration
 public class DatabaseConfig {
 
+	private final R2dbcConnectionProperties properties;
+
+	public DatabaseConfig(R2dbcConnectionProperties properties) {
+		this.properties = properties;
+	}
+
 	@Bean
 	public EmployeeRepository employeeRepository(R2dbcRepositoryFactory r2dbcRepositoryFactory) {
 		return r2dbcRepositoryFactory.getRepository(EmployeeRepository.class);
@@ -53,13 +59,12 @@ public class DatabaseConfig {
 	@Bean
 	public ConnectionFactory connectionFactory() {
 		PostgresqlConnectionConfiguration postgres = PostgresqlConnectionConfiguration.builder()
-				.host("localhost")
-				.port(5432)
-				.database("postgres")
-				.username("postgres")
-				.password("postgres")
+				.host(properties.getHost())
+				.port(properties.getPort())
+				.database(properties.getDatabase())
+				.username(properties.getUsername())
+				.password(properties.getPassword())
 				.build();
-
 		return new PostgresqlConnectionFactory(postgres);
 	}
 }

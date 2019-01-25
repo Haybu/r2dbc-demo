@@ -1,0 +1,7 @@
+spring:
+  r2dbc:
+    host: localhost
+    port: 5432
+    username: postgres
+    password: postgres
+    database: postgres
