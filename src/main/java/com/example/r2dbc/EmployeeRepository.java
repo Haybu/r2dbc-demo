@@ -23,6 +23,4 @@ import reactor.core.publisher.Flux;
 
 interface EmployeeRepository extends ReactiveCrudRepository<Employee, Integer> {
 
-	@Query("select id, name, salary, organization_id from employee e where e.organization_id = $1")
-	public Flux<Employee> findByOrganizationId(Integer organizationId);
 }
